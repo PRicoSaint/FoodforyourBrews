@@ -26,7 +26,6 @@ foodPairings();
 
 function searchRecipe(food) {
 
-
     fetch("https://api.edamam.com/api/recipes/v2?type=public&q=" + food + "&app_id=50b06b27&app_key=e832a13e6b33ae73edb54c8225f3c49f")
       .then(function (response) {
         return response.json();
@@ -38,7 +37,6 @@ function searchRecipe(food) {
       .catch(function (error) {
         alert('Unable to connect to recipe library. :( ');
       });
-
 
   };
   
