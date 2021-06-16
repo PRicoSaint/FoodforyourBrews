@@ -6,10 +6,11 @@ var randomBeerGen = document.querySelector('#randomgen')
 var foodpairing1 = [];
 var foodpairing2 = [];
 var foodpairing3 = [];
+var foodpairings = [];
 function searchPunkAPI(beerName) {
   addItemsHere.innerHTML = '';
     // fetch request a random beer
-    var requestUrl = 'https://api.punkapi.com/v2/beers/1?beer_name=' + beerName;
+    var requestUrl = 'https://api.punkapi.com/v2/beers?beer_name=' + beerName;
     console.log(requestUrl);
   
     fetch(requestUrl)
@@ -95,9 +96,15 @@ var displayCurrentBeer = function (data) {
       li2.textContent = 'Alcohol Content: ' + cBeerABV;
     var li3 = document.createElement("li");
       li3.textContent = 'Description: ' + cBeerDescription;
-    var thumbnail = document.createElement("img");
-      thumbnail.setAttribute("src", imgURL);
-      thumbnail.setAttribute("alt", "Picture of beer"); 
+        if (imgURL == null){
+          var thumbnail = document.createElement("img");
+          thumbnail.setAttribute("src", "./assets/images/Generic-Beer-picture.jpg");
+          thumbnail.setAttribute("alt", "Generic Picture of beer"); 
+      }else {
+          var thumbnail = document.createElement("img");
+          thumbnail.setAttribute("src", imgURL);
+          thumbnail.setAttribute("alt", "Picture of beer"); 
+    }
     var pairings = document.createElement('div');
     var pairingTitle = document.createElement('h2');
       pairingTitle.textContent = "Recommended Food Pairings";
@@ -121,5 +128,13 @@ var displayCurrentBeer = function (data) {
       pairingsList.appendChild(pairingsBullet1);
       pairingsList.appendChild(pairingsBullet2);
       pairingsList.appendChild(pairingsBullet3);
+    for (i=0;i<3;i++){
+      foodpairings.push(data[0].food_pairing[i])
+    }
+    savetoMemory()
+}
 
+var savetoMemory = function(){
+  localStorage.setItem("Food Pairings", JSON.stringify(foodpairings));
+  foodpairings =[];
 }
