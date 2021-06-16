@@ -2,7 +2,7 @@
 This is our 1st collaborative project for SMU coding bootcamp.
 
 ## Project Description
-Search for the perfect food pairing for your brew and see a restaurant that makes it.
+Search for the perfect food pairing for your brew and see a restaurant that has similar options.
 
 ##User Story
 ``
