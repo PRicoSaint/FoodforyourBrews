@@ -134,6 +134,14 @@ var displayCurrentBeer = function (data) {
       foodpairings.push(data[0].food_pairing[i])
     }
     savetoMemory()
+    var nextHTML = document.createElement("form");
+    nextHTML.setAttribute("action", "./recipe.html")
+    pairings.appendChild(nextHTML);
+    var button = document.createElement("button");
+    button.setAttribute("type", "submit");
+    button.setAttribute("value", "See recipes for the foods");
+    button.textContent= "See Recipes for Food Pairings!";
+    nextHTML.appendChild(button);
 }
 
 var savetoMemory = function(){
