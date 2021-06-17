@@ -5,6 +5,9 @@
 //run food through function 
 //display recipe name, image, and list of ingredients to recipe.html
 
+var recipeCard = document.querySelector('.recipeCards');
+
+
 function foodPairings(){
     var foodList = JSON.parse(localStorage.getItem("Food Pairings"));
     var emptyFoodList = "";
@@ -25,25 +28,47 @@ foodPairings();
 
 
 function searchRecipe(food) {
-
-
+  recipeCard.innerHTML = '';
     fetch("https://api.edamam.com/api/recipes/v2?type=public&q=" + food + "&app_id=50b06b27&app_key=e832a13e6b33ae73edb54c8225f3c49f")
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
         console.log(data);
+        displayRecipe(data);
       })
   
-      .catch(function (error) {
-        alert('Unable to connect to recipe library. :( ');
-      });
-
-
   };
   
 
-  function displayRecipes(){
+  var displayRecipe = function (data) {
+    
+    var recipeName = document.createElement('h2');
+    var recipeImage = document.createElement('img');
+    var recipeIngredients = document.createElement('ul');
+    var li = document.createElement('li');
+    
+    var recipeNameData = data['hits'][0]['recipe']['label'];
+    var recipeImageData = data['hits'][0]['recipe']['image'];
+    var recipeIngredientsData= data['hits'][0]['recipe']['ingredientLines'];
 
-        
+
+    recipeName.textContent = recipeNameData;
+    recipeImage.setAttribute("src", recipeImageData);
+    recipeIngredients.textContent = recipeIngredientsData;
+
+    recipeCard.appendChild(recipeName);
+    recipeCard.appendChild(recipeImage);
+    recipeCard.appendChild(recipeIngredients);
+    recipeIngredients.appendChild(li);
+
+
+
+
+
+    console.log(recipeNameData);
+    console.log(recipeImageData);
+    console.log(recipeIngredientsData);
+
+    
   }
