@@ -18,12 +18,15 @@ function foodPairings(){
         //change space to %20
         var singleFood = foodList[i];
         // console.log(singleFood.replace(' ', '%20'));
-        const arr = singleFood.split(' ');
-        const adjustedFood = arr.join('%20');
+        // const arr = singleFood.split(' ');
+        // const adjustedFood = arr.join('%20');
+        var adjustedFood = singleFood.replace(/ /g,"%20");
+        console.log(adjustedFood);
         searchRecipe(adjustedFood);
 
     }
 }
+
 foodPairings();
 
 
@@ -37,7 +40,8 @@ function searchRecipe(food) {
         console.log(data);
         displayRecipe(data);
       })
-  
+
+
   };
   
 
@@ -69,6 +73,5 @@ function searchRecipe(food) {
     console.log(recipeNameData);
     console.log(recipeImageData);
     console.log(recipeIngredientsData);
-
     
   }

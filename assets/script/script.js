@@ -9,6 +9,7 @@ var foodpairing3 = [];
 var foodpairings = [];
 function searchPunkAPI(beerName) {
   addItemsHere.innerHTML = '';
+  
     // fetch request a random beer
     var requestUrl = 'https://api.punkapi.com/v2/beers?beer_name=' + beerName;
     console.log(requestUrl);
@@ -55,21 +56,21 @@ function searchRandomPunkAPI() {
   var requestUrl = 'https://api.punkapi.com/v2/beers/random';
 
   fetch(requestUrl)
-  .then(function (response) {
-    if (response.ok) {
-      console.log(response);
-      response.json().then(function (data) {
-        console.log(data);
-        displayCurrentBeer(data);
+    .then(function (response) {
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data);
+          displayCurrentBeer(data);
 
-      });
-    } else {
-      alert('Error: ' + response.statusText);
-    }
-  })
-  .catch(function (error) {
-    alert('Unable to connect to beer library. :( ');
-  });
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert('Unable to connect to beer library. :( ');
+    });
 };
 
 
@@ -78,6 +79,7 @@ var displayCurrentBeer = function (data) {
     alert('No info found');
     return;
   }
+
     var cBeerName = data[0].name;
     var cBeerABV = data[0].abv;
     var cBeerDescription = data[0].description;
@@ -132,6 +134,14 @@ var displayCurrentBeer = function (data) {
       foodpairings.push(data[0].food_pairing[i])
     }
     savetoMemory()
+    var nextHTML = document.createElement("form");
+    nextHTML.setAttribute("action", "./recipe.html")
+    pairings.appendChild(nextHTML);
+    var button = document.createElement("button");
+    button.setAttribute("type", "submit");
+    button.setAttribute("value", "See recipes for the foods");
+    button.textContent= "See Recipes for Food Pairings!";
+    nextHTML.appendChild(button);
 }
 
 var savetoMemory = function(){
