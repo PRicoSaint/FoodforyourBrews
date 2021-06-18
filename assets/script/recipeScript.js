@@ -21,7 +21,7 @@ function foodPairings(){
         // const arr = singleFood.split(' ');
         // const adjustedFood = arr.join('%20');
         var adjustedFood = singleFood.replace(/ /g,"%20");
-        console.log(adjustedFood);
+        
         searchRecipe(adjustedFood);
 
     }
@@ -50,28 +50,40 @@ function searchRecipe(food) {
     var recipeName = document.createElement('h2');
     var recipeImage = document.createElement('img');
     var recipeIngredients = document.createElement('ul');
-    var li = document.createElement('li');
     
     var recipeNameData = data['hits'][0]['recipe']['label'];
     var recipeImageData = data['hits'][0]['recipe']['image'];
-    var recipeIngredientsData= data['hits'][0]['recipe']['ingredientLines'];
-
-
+    var recipeIngredientsData = data['hits'][0]['recipe']['ingredientLines'];
+ 
+    
+    
     recipeName.textContent = recipeNameData;
     recipeImage.setAttribute("src", recipeImageData);
-    recipeIngredients.textContent = recipeIngredientsData;
+      
+      
+      recipeCard.appendChild(recipeName);
+      recipeCard.appendChild(recipeImage);
+      recipeCard.appendChild(recipeIngredients);
 
-    recipeCard.appendChild(recipeName);
-    recipeCard.appendChild(recipeImage);
-    recipeCard.appendChild(recipeIngredients);
-    recipeIngredients.appendChild(li);
-
-
-
+      for(var i = 0; i < recipeIngredientsData.length; i++){
+        var li = document.createElement("li");
+        var recipeIngredientsList = data['hits'][0]['recipe']['ingredientLines'][i];
+        li.textContent = recipeIngredientsList;
+        recipeIngredients.appendChild(li);
+        }
 
 
     console.log(recipeNameData);
     console.log(recipeImageData);
-    console.log(recipeIngredientsData);
+    console.log(recipeIngredients);
     
   }
+
+  var previousHTML = document.createElement("form");
+  previousHTML.setAttribute("action", "./index.html")
+  recipeCard.appendChild(previousHTML);
+  var button = document.createElement("button");
+  button.setAttribute("type", "submit");
+  button.setAttribute("value", "Go back to search another beer");
+  button.textContent= "Go back to search another beer!";
+  previousHTML.appendChild(button);
