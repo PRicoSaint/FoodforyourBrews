@@ -7,19 +7,22 @@ var foodpairing1 = [];
 var foodpairing2 = [];
 var foodpairing3 = [];
 var foodpairings = [];
+var searchCycle = 0;
+var previousBeerName = [];
+
 function searchPunkAPI(beerName) {
   addItemsHere.innerHTML = '';
-  
-    // fetch request a random beer
+    // fetch request for beer typed in
     var requestUrl = 'https://api.punkapi.com/v2/beers?beer_name=' + beerName;
     console.log(requestUrl);
-  
+      
     fetch(requestUrl)
       .then(function (response) {
         if (response.ok) {
           console.log(response);
           response.json().then(function (data) {
             console.log(data);
+            checkSearchHistory(data, beerName);
             displayCurrentBeer(data);
   
           });
@@ -80,13 +83,13 @@ var displayCurrentBeer = function (data) {
     return;
   }
 
-    var cBeerName = data[0].name;
-    var cBeerABV = data[0].abv;
-    var cBeerDescription = data[0].description;
-    var imgURL = data[0].image_url;
-    var food1 = data[0].food_pairing[0];
-    var food2 = data[0].food_pairing[1];
-    var food3 = data[0].food_pairing[2];
+    var cBeerName = data[searchCycle].name;
+    var cBeerABV = data[searchCycle].abv;
+    var cBeerDescription = data[searchCycle].description;
+    var imgURL = data[searchCycle].image_url;
+    var food1 = data[searchCycle].food_pairing[0];
+    var food2 = data[searchCycle].food_pairing[1];
+    var food3 = data[searchCycle].food_pairing[2];
     console.log(cBeerName, cBeerABV, cBeerDescription, imgURL, food1, food2, food3);
 
     var title = document.createElement('h2');
@@ -148,3 +151,24 @@ var savetoMemory = function(){
   localStorage.setItem("Food Pairings", JSON.stringify(foodpairings));
   foodpairings =[];
 }
+
+var checkSearchHistory = function(data, beerName){
+  console.log(searchArrayLength);
+  console.log(searchCycle);
+  console.log(previousBeerName.includes(beerName) && searchArrayLength !== searchCycle);
+  console.log(previousBeerName.includes(beerName) && searchArrayLength == searchCycle);
+  console.log(previousBeerName);
+  console.log(beerName);
+
+  var searchArrayLength = (data.length)-1;
+            
+  if (previousBeerName.includes(beerName) && searchArrayLength !== searchCycle){
+    searchCycle++;
+  }else if (previousBeerName.includes(beerName) && searchArrayLength === searchCycle) {
+    searchCycle = 0;
+    // previousBeerName = [];
+  }
+  else {
+    previousBeerName.push(beerName);
+  }
+};
