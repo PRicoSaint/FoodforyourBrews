@@ -4,21 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Food for Brews</title>
+
     <title>Beer Search</title>
+<!-- >>>>>>> 3c664cf8316f62a70f14589cc765261553ed288f -->
 </head>
 <body>
-    <h1>Search for BEER</h1>
-    <form id="userinput">
-        <input name = "beername" id="beername" type="text" placeholder="Corona">
-        <button type="submit">Search</button>
-    </form>
-    <button id='randomgen'>Feeling Adventurous? Click here</button>
-
-    <div id="start-here">
+    <header>
+        <h1>Search for a Beer</h1>
+    </header>
+    <div class="card">
+          <form id="userinput"> 
+          <input name ="beername" id="beername" type="text" placeholder="Corona">
+          <button type="submit">Search</button>
+       </form>
+     <div id="start-here"></div>
         <!-- Insert beer information here -->
-
     </div>
-    
+    <div class="card">
+        <h2>Looking to try something new?</h2>
+        <button id='randomgen'>Feeling Adventurous? Click here</button>
+    </div>  
+      
+  
 </body>
-<script src="./assets/script/script.js"></script>
+ 
+    
+    <script src="./assets/script/script.js"></script>
 </html>
