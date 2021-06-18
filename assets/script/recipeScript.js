@@ -7,27 +7,16 @@
 
 var recipeCard = document.querySelector('.recipeCards');
 
+  var foodList = JSON.parse(localStorage.getItem("Food Pairings"));
+  var emptyFoodList = "";
+  localStorage.setItem("Food Pairings", JSON.stringify(emptyFoodList));
 
-function foodPairings(){
-    var foodList = JSON.parse(localStorage.getItem("Food Pairings"));
-    var emptyFoodList = "";
-    localStorage.setItem("Food Pairings", JSON.stringify(emptyFoodList));
+  for(i=0; i < foodList.length; i++){
+      var singleFood = foodList[i];
+      var adjustedFood = singleFood.replace(/ /g,"%20");
+      
+      searchRecipe(adjustedFood);}
 
-    for(i=0; i < foodList.length; i++){
-        //find spaces in string
-        //change space to %20
-        var singleFood = foodList[i];
-        // console.log(singleFood.replace(' ', '%20'));
-        // const arr = singleFood.split(' ');
-        // const adjustedFood = arr.join('%20');
-        var adjustedFood = singleFood.replace(/ /g,"%20");
-        
-        searchRecipe(adjustedFood);
-
-    }
-}
-
-foodPairings();
 
 
 function searchRecipe(food) {
@@ -40,6 +29,11 @@ function searchRecipe(food) {
         console.log(data);
         displayRecipe(data);
       })
+      .catch(function(){
+        var recipeName = document.createElement('h2');
+        recipeName.textContent = ("Recipe: "+ singleFood +" is unavailable");
+        recipeCard.appendChild(recipeName);
+      });
 
 
   };
@@ -54,8 +48,6 @@ function searchRecipe(food) {
     var recipeNameData = data['hits'][0]['recipe']['label'];
     var recipeImageData = data['hits'][0]['recipe']['image'];
     var recipeIngredientsData = data['hits'][0]['recipe']['ingredientLines'];
- 
-    
     
     recipeName.textContent = recipeNameData;
     recipeImage.setAttribute("src", recipeImageData);
