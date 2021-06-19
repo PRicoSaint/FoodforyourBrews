@@ -8,8 +8,8 @@
 var recipeCard = document.querySelector('.recipeCards');
 
   var foodList = JSON.parse(localStorage.getItem("Food Pairings"));
-  var emptyFoodList = "";
-  localStorage.setItem("Food Pairings", JSON.stringify(emptyFoodList));
+  // var emptyFoodList = "";
+  // localStorage.setItem("Food Pairings", JSON.stringify(emptyFoodList));
 
   for(i=0; i < foodList.length; i++){
       var singleFood = foodList[i];
@@ -31,8 +31,17 @@ function searchRecipe(food) {
       })
       .catch(function(){
         var recipeName = document.createElement('h2');
-        recipeName.textContent = ("Recipe: "+ singleFood +" is unavailable");
+        var googleEl = document.createElement('a');
+        var googleSearch = 'https://www.google.com/search?q='
+        var foodSearch = food.replace(/%20/g,'+');
+        googleEl.setAttribute('href', googleSearch + foodSearch);
+        googleEl.innerText = 'Try this google search';
+        
+        var foodReplace = food.replace(/[%20]/g,' ');
+        recipeName.textContent = ("---Recipe For: '"+ foodReplace +"' is Unavailable.--- ");
+
         recipeCard.appendChild(recipeName);
+        recipeCard.appendChild(googleEl);
       });
 
 
