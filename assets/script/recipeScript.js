@@ -34,7 +34,7 @@ function searchRecipe(food) {
         var googleEl = document.createElement('a');
         var googleSearch = 'https://www.google.com/search?q='
         var foodSearch = food.replace(/%20/g,'+');
-        googleEl.setAttribute('href', googleSearch + foodSearch);
+        googleEl.setAttribute('href', googleSearch + foodSearch + '+recipe');
         googleEl.innerText = 'Try this google search';
         
         var foodReplace = food.replace(/[%20]/g,' ');
