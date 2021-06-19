@@ -1,51 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
-    <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Food for Brews</title>
 
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href = "./assets/css/style.css">
+    <title>Food for Brews</title>
     <title>Beer Search</title>
-<!-- >>>>>>> 3c664cf8316f62a70f14589cc765261553ed288f -->
+    <!-- >>>>>>> 3c664cf8316f62a70f14589cc765261553ed288f -->
 </head>
+
 <body>
     <nav>
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo center">Food for your Brews</a>
-          <ul id="nav-mobile" class="left hide-on-med-and-down">
-           
-          </ul>
+            <a href="#" class="brand-logo center">Food for your Brews</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+            </ul>
         </div>
     </nav>
     <header>
         <h1>Search for a Beer</h1>
     </header>
-    <div class="card">
-          <form id="userinput"> 
-          <input name ="beername" id="beername" type="text" placeholder="Corona">
-          <button type="submit">Search</button>
-       </form>
-     <div id="start-here"></div>
-        <!-- Insert beer information here -->
-    </div>
-    <div class="card">
-        <h2>Looking to try something new?</h2>
-        <button id='randomgen'>Feeling Adventurous? Click here</button>
-    </div>  
-    <!-- Recent searches -->
-    <div class="card">
-        <h2>Recent Searches</h2>
-    
-    </div> 
+    <div class="row">
+        <div class="col s5">
+            <div class="container card">
+                <form id="userinput">
+                    <input name="beername" id="beername" type="text" placeholder="Craft Beers">
+                    <button class="waves-effect waves-light btn" type="submit">Search</button>
+                </form>
 
-      
-  
+            </div>
+            <div class="container card">
+                <h2>Looking to try something new?</h2>
+                <button id='randomgen' class="waves-effect waves-light btn">Feeling Adventurous? Click here</button>
+            </div>
+            <!-- Recent searches -->
+            <div id="buttons-go-here" class="container card">
+                <h2>Recent Searches</h2>
+            </div>
+
+        </div>
+        <div class="col s7">
+            <div id="start-here" class="container">
+            </div>
+            <!-- Insert beer information here -->
+
+
+            <!-- <div class="row">
+                <div class="col s12 m7">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="images/sample-1.jpg">
+                            <span class="card-title">Card Title</span>
+                        </div>
+                        <div class="card-content">
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                                I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
 </body>
- 
-    
-    <script src="./assets/script/script.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./assets/script/script.js"></script>
+
 </html>
