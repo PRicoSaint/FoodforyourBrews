@@ -205,8 +205,11 @@ var checkSearchHistory = function(data, beerName){
 
 var saveSearchHistory = function (event){
   var likedBeer = event.target.getAttribute("data-name");
-  favBeers.push(likedBeer);
-  localStorage.setItem("Beers", JSON.stringify(favBeers));
+  if (favBeers.includes(likedBeer)){
+    // DO NOTHING
+  }else{favBeers.push(likedBeer);
+localStorage.setItem("Beers", JSON.stringify(favBeers));
+}
 }
 
 
