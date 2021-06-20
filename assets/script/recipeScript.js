@@ -30,12 +30,15 @@ function searchRecipe(food) {
       .catch(function(){
         //Add error message and suggest a google search link
         var recipeName = document.createElement('h4');
+        recipeName.setAttribute('style', 'color:black; border:solid; padding:5px;border-radius:5px;');
+
         var googleEl = document.createElement('a');
         var googleSearch = 'https://www.google.com/search?q='
         var foodSearch = food.replace(/%20/g,'+');
-        googleEl.setAttribute('href', googleSearch + foodSearch + '+recipe');
-        googleEl.setAttribute('style', 'color:black');
+
         googleEl.innerText = 'Try this google search';
+        googleEl.setAttribute('href', googleSearch + foodSearch + '+recipe');
+        googleEl.setAttribute('style', 'color:black; border:solid; padding:5px;border-radius:5px;');
         
         var foodReplace = food.replace(/[%20]/g,' ');
         recipeName.textContent = ("---Recipe For: '"+ foodReplace +"' is Unavailable.--- ");
@@ -51,8 +54,11 @@ function searchRecipe(food) {
   var displayRecipe = function (data) {
     
     var recipeName = document.createElement('h4');
+    recipeName.setAttribute('style', 'margin:10px;padding:5px');
+
     var recipeImage = document.createElement('img');
-    var recipeIngredients = document.createElement('p');
+    var recipeIngredients = document.createElement('ul');
+
     
     var recipeNameData = data['hits'][0]['recipe']['label'];
     var recipeImageData = data['hits'][0]['recipe']['image'];
@@ -60,6 +66,7 @@ function searchRecipe(food) {
     
     recipeName.textContent = recipeNameData;
     recipeImage.setAttribute("src", recipeImageData);
+    recipeImage.setAttribute("style", "border-radius:25%;")
       
     var newCard = document.createElement('div');
     newCard.setAttribute('class', 'card');
@@ -70,10 +77,11 @@ function searchRecipe(food) {
 
     //loop through the ingredients and make a list out of them
       for(var i = 0; i < recipeIngredientsData.length; i++){
-        var li = document.createElement('p');
+        var li = document.createElement('li');
         var recipeIngredientsList = data['hits'][0]['recipe']['ingredientLines'][i];
         li.textContent = recipeIngredientsList;
         recipeIngredients.appendChild(li);
+        li.setAttribute('style', 'margin:10px; padding:5px; border-bottom:solid');
         }
     
   }
