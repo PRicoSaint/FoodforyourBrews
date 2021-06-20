@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+}
+  
+  body {
+    font-family:Verdana, Geneva, Tahoma, sans-serif; 
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+    justify-content: flex-start;
+    color: rgb(172, 206, 37);
+    background-color: rgb(9, 9, 9);
+    font-size: larger;
+}
+
+  header {
+    padding: 20px;
+    text-align: center;
+    background: #9b0a0a;
+    color: rgb(163, 247, 103);
+    font-size: 40px;
+    font-family: fantasy;
+}
+
+  p {
+    font-size: 25px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+  .card {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    padding: 10px;
+    flex: 0 0 100px;
+    box-shadow: 10px 10px 5px #e10b0b;
+    margin: 10px;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+
+  .cards {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    padding: 10px;
+    flex: 0 0 200px;
+    box-shadow: 10px 10px 5px #e10b0b;
+    margin: 20px;
+    text-align: center;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+ button:hover {
+     background-color: yellowgreen;
+
+}
+
+.button {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #eeeeee;
+  font-weight: 600;
+  font-size: 15px;
+  background-color: #153f00;
+  padding: 15px 50px;
+  margin: 0 auto;
+}
+.button span {
+  position: relative;
+  z-index: 1;
+}
+.button:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 470%;
+  width: 140%;
+  background: #52b71f;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-100%) translateY(-25%) rotate(45deg);
+  transform: translateX(-100%) translateY(-25%) rotate(45deg);
+}
+.button:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+  
