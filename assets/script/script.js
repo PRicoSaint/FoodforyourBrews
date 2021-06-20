@@ -2,6 +2,9 @@ var addItemsHere = document.querySelector('#start-here');
 var beerInput = document.querySelector('#beername')
 var userFormEl = document.querySelector('#userinput')
 var randomBeerGen = document.querySelector('#randomgen')
+var recentSearches = document.querySelector("#buttons-go-here")
+var recipes = document.querySelector("#recipes-page");
+
 
 var foodpairing1 = [];
 var foodpairing2 = [];
@@ -9,6 +12,7 @@ var foodpairing3 = [];
 var foodpairings = [];
 var searchCycle = 0;
 var previousBeerName = [];
+var favBeers =[];
 
 function searchPunkAPI(beerName) {
   addItemsHere.innerHTML = '';
@@ -86,32 +90,47 @@ var displayCurrentBeer = function (data) {
     var cBeerName = data[searchCycle].name;
     var cBeerABV = data[searchCycle].abv;
     var cBeerDescription = data[searchCycle].description;
+    var cBeerTagLine = data[searchCycle].tagline;
     var imgURL = data[searchCycle].image_url;
     var food1 = data[searchCycle].food_pairing[0];
     var food2 = data[searchCycle].food_pairing[1];
     var food3 = data[searchCycle].food_pairing[2];
     console.log(cBeerName, cBeerABV, cBeerDescription, imgURL, food1, food2, food3);
-
-    var title = document.createElement('h2');
-      title.textContent = 'More Information';
+    
+    var sample = document.createElement("div");
+      sample.setAttribute("class", "row");
+    var spacing = document.createElement("div");
+      spacing.setAttribute("class", "col s12 m7");
+    var sampleCard =document.createElement("div");
+      sampleCard.setAttribute("class", "card");
+    var sampleCardImgSection = document.createElement("div");
+      sampleCardImgSection.setAttribute("class", "card-image");
+      if (imgURL == null){
+        var thumbnail = document.createElement("img");
+        thumbnail.setAttribute("src", "./assets/images/Generic-Beer-picture.jpg");
+        thumbnail.setAttribute("alt", "Generic Picture of beer");
+        thumbnail.setAttribute("class", "img-width"); 
+      }else {
+        var thumbnail = document.createElement("img");
+        thumbnail.setAttribute("src", imgURL);
+        thumbnail.setAttribute("alt", "Picture of beer");
+        thumbnail.setAttribute("class", "img-width"); 
+      } 
+    var title = document.createElement('span');
+      title.setAttribute("class", "card-title");
+      title.textContent = 'Beer: ' + cBeerName;
+    var sampleCardContent = document.createElement("div");
+      sampleCardContent.setAttribute("class", "class-content");
     var box = document.createElement("ul");
     var li1 = document.createElement("li");
-      li1.textContent = 'Beer: ' + cBeerName;
+      li1.textContent = cBeerTagLine;
     var li2 = document.createElement("li");
       li2.textContent = 'Alcohol Content: ' + cBeerABV;
     var li3 = document.createElement("li");
       li3.textContent = 'Description: ' + cBeerDescription;
-        if (imgURL == null){
-          var thumbnail = document.createElement("img");
-          thumbnail.setAttribute("src", "./assets/images/Generic-Beer-picture.jpg");
-          thumbnail.setAttribute("alt", "Generic Picture of beer"); 
-      }else {
-          var thumbnail = document.createElement("img");
-          thumbnail.setAttribute("src", imgURL);
-          thumbnail.setAttribute("alt", "Picture of beer"); 
-    }
     var pairings = document.createElement('div');
-    var pairingTitle = document.createElement('h2');
+      pairings.setAttribute("class", "card-action");
+    var pairingTitle = document.createElement('h4');
       pairingTitle.textContent = "Recommended Food Pairings";
     var pairingsList = document.createElement('ul');
     var pairingsBullet1 = document.createElement('li');
@@ -121,20 +140,27 @@ var displayCurrentBeer = function (data) {
     var pairingsBullet3 = document.createElement("li");
       pairingsBullet3.textContent = food3;           
 
-      addItemsHere.appendChild(title);
-      addItemsHere.appendChild(box);
+      addItemsHere.appendChild(sample);
+      sample.appendChild(spacing);
+      spacing.appendChild(sampleCard);
+      sampleCard.appendChild(sampleCardImgSection);
+      sampleCardImgSection.appendChild(thumbnail);
+      sampleCard.appendChild(title);
+      sampleCard.appendChild(sampleCardContent);
+      sampleCardContent.appendChild(box)
       box.appendChild(li1);
       box.appendChild(li2);
       box.appendChild(li3);
-      box.appendChild(thumbnail);
-      addItemsHere.appendChild(pairings);
+      sampleCardContent.appendChild(pairings);
       pairings.appendChild(pairingTitle);
       pairings.appendChild(pairingsList);
       pairingsList.appendChild(pairingsBullet1);
       pairingsList.appendChild(pairingsBullet2);
       pairingsList.appendChild(pairingsBullet3);
+
+      // Saves food pairings to local storage
     for (i=0;i<3;i++){
-      foodpairings.push(data[0].food_pairing[i])
+      foodpairings.push(data[searchCycle].food_pairing[i])
     }
     savetoMemory()
     var nextHTML = document.createElement("form");
@@ -143,6 +169,8 @@ var displayCurrentBeer = function (data) {
     var button = document.createElement("button");
     button.setAttribute("type", "submit");
     button.setAttribute("value", "See recipes for the foods");
+    button.setAttribute("class", "waves-effect waves-light btn");
+    button.setAttribute("data-name", cBeerName);
     button.textContent= "See Recipes for Food Pairings!";
     nextHTML.appendChild(button);
 }
@@ -170,5 +198,75 @@ var checkSearchHistory = function(data, beerName){
   }
   else {
     previousBeerName.push(beerName);
+    console.log(previousBeerName);
+
   }
 };
+
+var saveSearchHistory = function (event){
+  var likedBeer = event.target.getAttribute("data-name");
+  if (favBeers.includes(likedBeer)){
+    // DO NOTHING
+  }else{favBeers.push(likedBeer);
+localStorage.setItem("Beers", JSON.stringify(favBeers));
+}
+}
+
+
+var init = function(){
+  var localSavedBeers = JSON.parse(localStorage.getItem("Beers"));
+
+  if (localSavedBeers !== null) {
+    favBeers = localSavedBeers;
+  }
+  for (var i = 0; i < favBeers.length; i++) {
+    var button = document.createElement("button");
+    button.textContent = favBeers[i];
+    button.setAttribute("class", "waves-effect waves-light btn");
+    button.setAttribute("data-name", favBeers[i]);
+    recentSearches.appendChild(button);
+}
+};
+
+addItemsHere.addEventListener("click", saveSearchHistory);
+// recentSearches.addEventListener("click", clickRecentSearches);
+
+var clickRecentSearches = function (event) {
+  var oldBeer = event.target.getAttribute("data-name");
+  console.log(oldBeer);
+
+  if (oldBeer) {
+    oldSearchPunkAPI(oldBeer);
+  }
+};
+init();
+
+function oldSearchPunkAPI(oldBeer) {
+  addItemsHere.innerHTML = '';
+    // fetch request for beer typed in
+    var requestUrl = 'https://api.punkapi.com/v2/beers?beer_name=' + oldBeer;
+    console.log(requestUrl);
+      
+    fetch(requestUrl)
+      .then(function (response) {
+        if (response.ok) {
+          console.log(response);
+          response.json().then(function (data) {
+            console.log(data);
+            // checkSearchHistory(data, oldBeer);
+            displayCurrentBeer(data);
+  
+          });
+        } else {
+          alert('Error: ' + response.statusText);
+        }
+      })
+      .catch(function (error) {
+        alert('Unable to connect to beer library. :( ');
+      });
+};
+
+
+
+
+recentSearches.addEventListener("click", clickRecentSearches);
