@@ -26,7 +26,7 @@ h2{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  min-width: max-content;
+  min-width: auto;
   align-content: center;
 }
 
