@@ -1,3 +1,4 @@
+// Query selector set up.
 var addItemsHere = document.querySelector('#start-here');
 var beerInput = document.querySelector('#beername')
 var userFormEl = document.querySelector('#userinput')
@@ -5,7 +6,7 @@ var randomBeerGen = document.querySelector('#randomgen')
 var recentSearches = document.querySelector("#buttons-go-here")
 var recipes = document.querySelector("#recipes-page");
 
-
+// Global variables set up. Some are redundant.
 var foodpairing1 = [];
 var foodpairing2 = [];
 var foodpairing3 = [];
@@ -41,7 +42,7 @@ function searchPunkAPI(beerName) {
     });
 };
 
-
+// Waits for user to input a beer type or name and send it to punkAPI to produce a response.
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
@@ -82,7 +83,9 @@ function searchRandomPunkAPI() {
     });
 };
 
-
+// This function takes array pulled from punkAPI and takes specific data points from it. 
+// It looks up how many times the search button has been clicks and take a different beer from the array to display.
+// When the options have been exhausted, it will show the 1st beer in the array.
 var displayCurrentBeer = function (data) {
   if (data.length === 0) {
     alert('No info found');
@@ -99,6 +102,7 @@ var displayCurrentBeer = function (data) {
   var food3 = data[searchCycle].food_pairing[2];
   console.log(cBeerName, cBeerABV, cBeerDescription, imgURL, food1, food2, food3);
 
+  // Card element creation
   var sample = document.createElement("div");
   sample.setAttribute("class", "row");
   var spacing = document.createElement("div");
@@ -118,6 +122,7 @@ var displayCurrentBeer = function (data) {
     thumbnail.setAttribute("alt", "Picture of beer");
     thumbnail.setAttribute("class", "img-width");
   }
+  // More element creation
   var title = document.createElement('span');
   title.setAttribute("class", "card-title");
   title.textContent = 'Beer: ' + cBeerName;
@@ -142,6 +147,7 @@ var displayCurrentBeer = function (data) {
   var pairingsBullet3 = document.createElement("li");
   pairingsBullet3.textContent = food3;
 
+// Formatting elements created.
   addItemsHere.appendChild(sample);
   sample.appendChild(spacing);
   spacing.appendChild(sampleCard);
@@ -160,11 +166,14 @@ var displayCurrentBeer = function (data) {
   pairingsList.appendChild(pairingsBullet2);
   pairingsList.appendChild(pairingsBullet3);
 
-  // Saves food pairings to local storage
+  // Saves food pairings to array that will placed into local storage
   for (i = 0; i < 3; i++) {
     foodpairings.push(data[searchCycle].food_pairing[i])
   }
   savetoMemory()
+  // sets up button to travel to next page where recipes for food pairings are located.
+  // Also places name of beer into button target as a way to then save it local storage to be pulled from later. 
+  // These values will then populate recent searches, but only if the user looked at recipes 1st.
   var nextHTML = document.createElement("form");
   nextHTML.setAttribute("action", "./recipe.html")
   pairings.appendChild(nextHTML);
@@ -174,22 +183,17 @@ var displayCurrentBeer = function (data) {
   button.setAttribute("data-name", cBeerName);
   var spain = document.createElement("span");
   spain.textContent = "See Recipes for Food Pairings!";
+  spain.setAttribute("data-name", cBeerName);
   nextHTML.appendChild(button);
   button.appendChild(spain);
 }
-
+// This function saves the food pairings to local storage so that recipe web page can pull data from this array and search Edamame API.
 var savetoMemory = function () {
   localStorage.setItem("Food Pairings", JSON.stringify(foodpairings));
   foodpairings = [];
 }
 // If search is clicked on again, it will pull new beer from array and display it.
 var checkSearchHistory = function (data, beerName) {
-  // console.log(searchArrayLength);
-  // console.log(searchCycle);
-  // console.log(previousBeerName.includes(beerName) && searchArrayLength !== searchCycle);
-  // console.log(previousBeerName.includes(beerName) && searchArrayLength == searchCycle);
-  // console.log(previousBeerName);
-  // console.log(beerName);
 
   var searchArrayLength = (data.length) - 1;
 
@@ -216,7 +220,7 @@ var saveSearchHistory = function (event) {
   }
 }
 
-// Function loads beers from local storage and populates recent search
+// Function loads beers from local storage and populates recent search box.
 var init = function () {
   var localSavedBeers = JSON.parse(localStorage.getItem("Beers"));
 
@@ -228,13 +232,16 @@ var init = function () {
     var spain = document.createElement("span");
     spain.textContent = favBeers[i];
     button.setAttribute("class", "button");
-    if (favBeers[i] !== null) {
-      button.setAttribute("data-name", favBeers[i]);
+    // if (favBeers[i] !== null) {
+    //   button.setAttribute("data-name", favBeers[i]);
+    //   recentSearches.appendChild(button);
+    //   button.appendChild(spain);
+    // } else {
+    //   // Do nothing
+    // }
+    button.setAttribute("data-name", favBeers[i]);
       recentSearches.appendChild(button);
       button.appendChild(spain);
-    } else {
-      // Do nothing
-    }
   }
 };
 
@@ -251,6 +258,7 @@ var clickRecentSearches = function (event) {
 };
 init();
 
+// Takes the data name of target button clicked in recent searches area. Displays current beer, but does not need to search history.
 function oldSearchPunkAPI(oldBeer) {
   addItemsHere.innerHTML = '';
   // fetch request for beer typed in
@@ -278,5 +286,5 @@ function oldSearchPunkAPI(oldBeer) {
 
 
 
-
+// Waits for user to click a recent searched beer to run function.
 recentSearches.addEventListener("click", clickRecentSearches);
