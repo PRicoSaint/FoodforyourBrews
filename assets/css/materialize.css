@@ -2408,13 +2408,13 @@ select {
  *    controls in Android 4.
  * 2. Correct the inability to style clickable types in iOS and Safari.
  */
-button,
+/* button,
 html [type="button"],
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
   /* 2 */
-}
+/* } */
 
 /**
  * Remove the inner border and padding in Firefox.
@@ -2430,12 +2430,12 @@ button::-moz-focus-inner,
 /**
  * Restore the focus styles unset by the previous rule.
  */
-button:-moz-focusring,
+/* button:-moz-focusring,
 [type="button"]:-moz-focusring,
 [type="reset"]:-moz-focusring,
 [type="submit"]:-moz-focusring {
   outline: 1px dotted ButtonText;
-}
+} */
 
 /**
  * Correct the padding in Firefox.
@@ -6093,7 +6093,7 @@ select:focus {
 
 button:focus {
   outline: none;
-  background-color: #2ab7a9;
+  /* background-color: #2ab7a9; */
 }
 
 label {
@@ -6134,7 +6134,7 @@ input[type=tel]:not(.browser-default),
 input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
-  background-color: transparent;
+  /* background-color: transparent; */
   border: none;
   border-bottom: 1px solid #9e9e9e;
   border-radius: 0;
@@ -6409,7 +6409,7 @@ textarea.materialize-textarea:focus.valid ~ .helper-text[data-success],
 textarea.materialize-textarea.invalid ~ .helper-text[data-error],
 textarea.materialize-textarea:focus.invalid ~ .helper-text[data-error], .select-wrapper.valid .helper-text[data-success],
 .select-wrapper.invalid ~ .helper-text[data-error] {
-  color: transparent;
+  /* color: transparent; */
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -8805,9 +8805,9 @@ input[type=range]::-ms-thumb {
   color: inherit;
 }
 
-.datepicker-day-button:focus {
+/* .datepicker-day-button:focus {
   background-color: rgba(43, 161, 150, 0.25);
-}
+} */
 
 /* Footer */
 .datepicker-footer {

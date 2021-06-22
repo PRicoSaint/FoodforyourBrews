@@ -52,13 +52,13 @@ var formSubmitHandler = function (event) {
     searchPunkAPI(beerName);
 
   } else {
-    alert('Please enter another Beer name');
+    alert('Please type a beer name');
   }
 };
 
 userFormEl.addEventListener('submit', formSubmitHandler);
 randomBeerGen.addEventListener('click', searchRandomPunkAPI);
-
+// This function completes the same thing as the above, but uses the random search function from the punkAPI.
 function searchRandomPunkAPI() {
   addItemsHere.innerHTML = '';
   // fetch request a random beer
@@ -88,7 +88,7 @@ var displayCurrentBeer = function (data) {
     alert('No info found');
     return;
   }
-
+// Pulls and saves data to variables.
   var cBeerName = data[searchCycle].name;
   var cBeerABV = data[searchCycle].abv;
   var cBeerDescription = data[searchCycle].description;
@@ -102,7 +102,7 @@ var displayCurrentBeer = function (data) {
   var sample = document.createElement("div");
   sample.setAttribute("class", "row");
   var spacing = document.createElement("div");
-  spacing.setAttribute("class", "col s12 m7");
+  spacing.setAttribute("class", "container");
   var sampleCard = document.createElement("div");
   sampleCard.setAttribute("class", "card");
   var sampleCardImgSection = document.createElement("div");
@@ -170,25 +170,26 @@ var displayCurrentBeer = function (data) {
   pairings.appendChild(nextHTML);
   var button = document.createElement("button");
   button.setAttribute("type", "submit");
-  button.setAttribute("value", "See recipes for the foods");
-  button.setAttribute("class", "waves-effect waves-light btn");
+  button.setAttribute("class", "button");
   button.setAttribute("data-name", cBeerName);
-  button.textContent = "See Recipes for Food Pairings!";
+  var spain = document.createElement("span");
+  spain.textContent = "See Recipes for Food Pairings!";
   nextHTML.appendChild(button);
+  button.appendChild(spain);
 }
 
 var savetoMemory = function () {
   localStorage.setItem("Food Pairings", JSON.stringify(foodpairings));
   foodpairings = [];
 }
-
+// If search is clicked on again, it will pull new beer from array and display it.
 var checkSearchHistory = function (data, beerName) {
-  console.log(searchArrayLength);
-  console.log(searchCycle);
-  console.log(previousBeerName.includes(beerName) && searchArrayLength !== searchCycle);
-  console.log(previousBeerName.includes(beerName) && searchArrayLength == searchCycle);
-  console.log(previousBeerName);
-  console.log(beerName);
+  // console.log(searchArrayLength);
+  // console.log(searchCycle);
+  // console.log(previousBeerName.includes(beerName) && searchArrayLength !== searchCycle);
+  // console.log(previousBeerName.includes(beerName) && searchArrayLength == searchCycle);
+  // console.log(previousBeerName);
+  // console.log(beerName);
 
   var searchArrayLength = (data.length) - 1;
 
@@ -204,7 +205,7 @@ var checkSearchHistory = function (data, beerName) {
 
   }
 };
-
+// This function saves the beer that was clicked on to see food pairings.
 var saveSearchHistory = function (event) {
   var likedBeer = event.target.getAttribute("data-name");
   if (favBeers.includes(likedBeer)) {
@@ -215,7 +216,7 @@ var saveSearchHistory = function (event) {
   }
 }
 
-
+// Function loads beers from local storage and populates recent search
 var init = function () {
   var localSavedBeers = JSON.parse(localStorage.getItem("Beers"));
 
@@ -224,16 +225,22 @@ var init = function () {
   }
   for (var i = 0; i < favBeers.length; i++) {
     var button = document.createElement("button");
-    button.textContent = favBeers[i];
-    button.setAttribute("class", "waves-effect waves-light btn");
-    button.setAttribute("data-name", favBeers[i]);
-    recentSearches.appendChild(button);
+    var spain = document.createElement("span");
+    spain.textContent = favBeers[i];
+    button.setAttribute("class", "button");
+    if (favBeers[i] !== null) {
+      button.setAttribute("data-name", favBeers[i]);
+      recentSearches.appendChild(button);
+      button.appendChild(spain);
+    } else {
+      // Do nothing
+    }
   }
 };
 
 addItemsHere.addEventListener("click", saveSearchHistory);
-// recentSearches.addEventListener("click", clickRecentSearches);
 
+// Waits for recent search to be clicked and then searches that function.
 var clickRecentSearches = function (event) {
   var oldBeer = event.target.getAttribute("data-name");
   console.log(oldBeer);

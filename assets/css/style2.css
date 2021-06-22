@@ -1,3 +1,8 @@
+:root{
+ --back: rgb(230, 238, 127);
+ --letters: rgb(103, 105, 77);
+ --cardback: rgb(147, 223, 241);
+}
 * {
     box-sizing: border-box;
 }
@@ -9,16 +14,16 @@
     flex-direction: column;
     min-height: 600px;
     justify-content: flex-start;
-    color: rgb(172, 206, 37);
-    background-color: rgb(9, 9, 9);
+    color: var(--letters);
+    background-color: var(--back);
     font-size: larger;
 }
 
   header {
     padding: 20px;
     text-align: center;
-    background: #9b0a0a;
-    color: rgb(163, 247, 103);
+    background: var(--back);
+    color: var(--letters);
     font-size: 40px;
     font-family: fantasy;
 }
@@ -34,28 +39,18 @@
     border-radius: 20px;
     padding: 10px;
     flex: 0 0 100px;
-    box-shadow: 10px 10px 5px #e10b0b;
+    box-shadow: 10px 10px 5px var(--letters);
     margin: 10px;
+    background-color: var(--cardback);
     text-align: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
-
-  .cards {
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 20px;
-    padding: 10px;
-    flex: 0 0 200px;
-    box-shadow: 10px 10px 5px #e10b0b;
-    margin: 20px;
-    text-align: center;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
 
  button:hover {
-     background-color: yellowgreen;
+     background-color: var(--letters);
 
 }
 
@@ -68,12 +63,12 @@
   outline: none;
   overflow: hidden;
   position: relative;
-  color: #eeeeee;
+  color: rgba(37, 37, 37, 0.904);
   font-weight: 600;
   font-size: 15px;
-  background-color: #153f00;
+  background-color: var(--back);
   padding: 15px 50px;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 .button span {
   position: relative;
@@ -86,7 +81,7 @@
   top: 0;
   height: 470%;
   width: 140%;
-  background: #52b71f;
+  background: yellow;
   -webkit-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
   -webkit-transform: translateX(-100%) translateY(-25%) rotate(45deg);
@@ -98,8 +93,31 @@
 }
 
   
+.img-width{
+  max-width: 100px;
+  width: auto;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+}
 
+span{
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+::placeholder{
+  color: var(--letters);
+  font-size: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
+#beername{
+  width: 40%;
+  border-radius:4px;
+  background-color: var(--cardback);
+  text-align: center;
+}
 
 
 
