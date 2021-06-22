@@ -74,6 +74,7 @@ function searchRecipe(food) {
     newCard.appendChild(recipeImage);
     newCard.appendChild(recipeIngredients);
     recipeCard.appendChild(newCard);
+    newCard.setAttribute("style", "border-radius:10px; margin:20px; display:flex; flex-direction: column; flex-wrap:wrap; max-width:700px; text-align:center")
 
     //loop through the ingredients and make a list out of them
       for(var i = 0; i < recipeIngredientsData.length; i++){
@@ -81,7 +82,7 @@ function searchRecipe(food) {
         var recipeIngredientsList = data['hits'][0]['recipe']['ingredientLines'][i];
         li.textContent = recipeIngredientsList;
         recipeIngredients.appendChild(li);
-        li.setAttribute('style', 'margin:10px; padding:5px; border-bottom:solid');
+        li.setAttribute('style', 'margin:10px; padding:5px; border-bottom:solid; max-width:400px');
         }
     
   }
