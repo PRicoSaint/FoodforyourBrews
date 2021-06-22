@@ -35,8 +35,11 @@ This is our first collaborative project for SMU coding bootcamp.
   Github Repository: https://github.com/PRicoSaint/FoodforyourBrews
 
   Deployed Site here: 
+  https://pricosaint.github.io/FoodforyourBrews/
+
+  Screenshot:
   
-![Food For Your Brews](screenshot.png)
+![Food For Your Brews](./assets/images/FoodforBrews.gif)
 
   
   ## Technologies-Used:
@@ -44,7 +47,7 @@ This is our first collaborative project for SMU coding bootcamp.
  * CSS
  * Javascript
  * Materialize
- * Edamam Recpie API
+ * Edamam Recipe API
  * Punk API
 
   ## License:
