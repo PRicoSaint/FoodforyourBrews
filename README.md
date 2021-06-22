@@ -13,7 +13,7 @@ This is our first collaborative project for SMU coding bootcamp.
 
   * [License](#License)
   
-  * [Team-Members](#Team-Members:)
+  * [Team-Members](#Team-Members)
     
   ## Description:
     ''

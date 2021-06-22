@@ -28,9 +28,14 @@ function searchRecipe(food) {
         displayRecipe(data);
       })
       .catch(function(){
-        //Add error message and suggest a google search link
+  
         var recipeName = document.createElement('h4');
-        recipeName.setAttribute('style', 'color:black; border:solid; padding:5px;border-radius:5px;');
+        var errorCard = document.createElement('div');
+        
+
+        errorCard.setAttribute('style', 'display:flex;flex-direction: column; height:fit-content;');
+        recipeName.setAttribute('style', 'color:black; border:solid; padding:5px;border-radius:5px; display:flex;width:400px; height:fit-content');
+        
 
         var googleEl = document.createElement('a');
         var googleSearch = 'https://www.google.com/search?q='
@@ -38,13 +43,16 @@ function searchRecipe(food) {
 
         googleEl.innerText = 'Try this google search';
         googleEl.setAttribute('href', googleSearch + foodSearch + '+recipe');
-        googleEl.setAttribute('style', 'color:black; border:solid; padding:5px;border-radius:5px;');
+        googleEl.setAttribute('style', 'color:black; border:solid; padding:5px;border-radius:5px; height:fit-content; width:fit-content');
         
         var foodReplace = food.replace(/[%20]/g,' ');
         recipeName.textContent = ("---Recipe For: '"+ foodReplace +"' is Unavailable.--- ");
 
-        recipeCard.appendChild(recipeName);
-        recipeCard.appendChild(googleEl);
+        
+        recipeCard.appendChild(errorCard);
+        errorCard.appendChild(recipeName);
+        errorCard.appendChild(googleEl);
+
       });
 
 
@@ -54,7 +62,7 @@ function searchRecipe(food) {
   var displayRecipe = function (data) {
     
     var recipeName = document.createElement('h4');
-    recipeName.setAttribute('style', 'margin:10px;padding:5px');
+    recipeName.setAttribute('style', 'margin:10px ;padding:5px;');
 
     var recipeImage = document.createElement('img');
     var recipeIngredients = document.createElement('ul');
@@ -74,6 +82,7 @@ function searchRecipe(food) {
     newCard.appendChild(recipeImage);
     newCard.appendChild(recipeIngredients);
     recipeCard.appendChild(newCard);
+    newCard.setAttribute("style", "border-radius:10px; margin:20px; display:flex; flex-wrap:wrap; text-align:center; max-width:700px")
 
     //loop through the ingredients and make a list out of them
       for(var i = 0; i < recipeIngredientsData.length; i++){
@@ -81,7 +90,7 @@ function searchRecipe(food) {
         var recipeIngredientsList = data['hits'][0]['recipe']['ingredientLines'][i];
         li.textContent = recipeIngredientsList;
         recipeIngredients.appendChild(li);
-        li.setAttribute('style', 'margin:10px; padding:5px; border-bottom:solid');
+        li.setAttribute('style', 'margin:10px; padding:5px; border-bottom:solid; max-width:400px');
         }
     
   }
