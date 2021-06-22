@@ -28,10 +28,13 @@ function searchRecipe(food) {
         displayRecipe(data);
       })
       .catch(function(){
-        //Add error message and suggest a google search link
+  
         var recipeName = document.createElement('h4');
-        recipeName.setAttribute('style', 'color:black; border:solid; padding:5px;border-radius:5px; display:flex;height:fit-content');
-        recipeCard.setAttribute('style', 'display:flex;flex-direction: column; height:fit-content');
+        var errorCard = document.createElement('div');
+        
+
+        errorCard.setAttribute('style', 'display:flex;flex-direction: column; height:fit-content;');
+        recipeName.setAttribute('style', 'color:black; border:solid; padding:5px;border-radius:5px; display:flex;width:400px; height:fit-content');
         
 
         var googleEl = document.createElement('a');
@@ -45,8 +48,11 @@ function searchRecipe(food) {
         var foodReplace = food.replace(/[%20]/g,' ');
         recipeName.textContent = ("---Recipe For: '"+ foodReplace +"' is Unavailable.--- ");
 
-        recipeCard.appendChild(recipeName);
-        recipeCard.appendChild(googleEl);
+        
+        recipeCard.appendChild(errorCard);
+        errorCard.appendChild(recipeName);
+        errorCard.appendChild(googleEl);
+
       });
 
 
